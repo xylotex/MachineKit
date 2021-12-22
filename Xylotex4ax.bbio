@@ -1,0 +1,43 @@
+
+#
+# Any GPIO pins driven by the PRU need to have their direction set properly
+# here.  The PRU does not do any setup of the GPIO, it just yanks on the
+# pins and assumes you have the output enables configured already
+#
+# Direct PRU inputs and outputs do not need to be configured here, the pin
+# mux setup (which is handled by the device tree overlay) should be all
+# the setup needed.
+#
+# Any GPIO pins driven by the hal_bb_gpio driver do not need to be
+# configured here.  The hal_bb_gpio module handles setting the output
+# enable bits properly.  These pins _can_ however be set here without
+# causing problems.  You may wish to do this for documentation or to make
+# sure the pin starts with a known value as soon as possible.
+
+#BAREBONESCNC
+overlay cape-universal
+overlay cape-bone-iio
+#overlay cape-univ-emmc
+
+P8_10 out # spindle on/off
+P8_07 out # spindle fwd/rev
+P9_14 out # coolant on/off
+P9_15 out # other
+
+P8_12 out # A_DIR
+P8_13 out # A_STEP
+P8_14 out # Z_DIR
+P8_15 out # Z_STEP
+P8_16 out # Y_DIR
+P8_17 out # Y_STEP
+P8_18 out # X_DIR
+P8_19 out # X_STEP
+
+P9_11 in # STOP
+P9_13 in # X Home Switch
+P9_23 in # Y Home Switch
+P9_41 in # Z Home Switch
+P8_09 in # A Home Switch
+
+P8_11 out # LED and active low gate enable
+
